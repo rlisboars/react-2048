@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import styled from 'styled-components'
 import { randomTile, sumTiles, checkIfPlayerHadLost, randomStart } from '../utils'
 import Scoreboard from './Scoreboard'
@@ -18,7 +18,7 @@ const Message = styled.h1`
   text-align: center;
 `
 
-const RestartButton = styled.button`
+const Button = styled.button`
   display: block;
   margin: 0 auto;
   height: 50px;
@@ -33,8 +33,14 @@ const RestartButton = styled.button`
   }
 `
 
+const Canvas = styled.div`
+  &:focus {
+    outline: none
+  }
+`
+
 function Board(props) {
-  const [score, setScore] = useState(-1)
+  const [score, setScore] = useState(-2)
   const [lastScore, setLastScore] = useState(0)
 
   const initialTiles = props.initialTiles
@@ -42,20 +48,26 @@ function Board(props) {
   initialBoard[initialTiles.position1[0]][initialTiles.position1[1]] = initialTiles.tile1
   initialBoard[initialTiles.position2[0]][initialTiles.position2[1]] = initialTiles.tile2
   
-  
   const [board, setBoard] = useState(initialBoard)
+  const boardRef = useRef()
 
+  useEffect(() => {
+    if (score >= 0) {
+      boardRef.current.focus()
+    }
+  })
+  
   return (
       <div>
-      { score === -1 && 
+      { score < 0 && 
         <div>
           <Scoreboard score={lastScore}/>
-          <Message>Você perdeu!</Message>
-          <RestartButton onClick={restartGame}>Reiniciar</RestartButton>
+          <Message>{ score === -1 ? 'Você perdeu!' : ''}</Message>
+          <Button onClick={startGame}>{ score === -1 ? 'Reiniciar' : 'Começar' }</Button>
         </div>
       }
       { score >= 0 && 
-        <div tabIndex="0" onKeyDown={e => setBoard(keyPressed(e, board))}>
+        <Canvas ref={boardRef} tabIndex="1" onKeyDown={e => setBoard(keyPressed(e, board))}>
           <Scoreboard score={score}/>
           <StyledBoard>
             {
@@ -66,7 +78,7 @@ function Board(props) {
               })
             }
           </StyledBoard>
-        </div>
+        </Canvas>
       }
       </div>
   )
@@ -115,7 +127,7 @@ function Board(props) {
     return newBoard
   }
 
-  function restartGame() {
+  function startGame() {
     const initialTiles = randomStart()
     const initialBoard = [[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]]
     initialBoard[initialTiles.position1[0]][initialTiles.position1[1]] = initialTiles.tile1
