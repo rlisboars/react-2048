@@ -1,0 +1,122 @@
+html {
+  font-family: "Clear Sans", "Helvetica Neue", Arial, sans-serif;
+}
+
+.scoreboard {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 80px 40px;
+  column-gap: 10px;
+  width: 410px;
+  height: 120px;
+  margin: 0 auto;
+}
+
+.score {
+  display: grid;
+  grid-template-rows: 1fr 2fr;
+  border-radius: 4px;
+  background: #b4b6c2;
+  color: white;
+  font-weight: bold;
+  font-size: 25px;
+  text-align: center;
+}
+
+.score-title {
+  color: white;
+  text-align: center;
+  line-height: 40px;
+  font-weight: bold;
+  font-size: 15px;
+}
+
+.mission-text {
+  color: #b4b6c2;
+  font-size: 12px;
+  font-weight: bold;
+  grid-column-start: 1;
+  grid-column-end: 3;
+  text-align: center;
+  line-height: 40px;
+}
+
+.game-container {
+  display: grid;
+  grid-template: repeat(4, 100px) / repeat(4, 100px);
+  width: 410px;
+  height: 410px;
+  background: #b4b6c2;
+  border-radius: 4px;
+  margin: 0 auto;
+}
+
+.tile {
+  border-radius: 4px;
+  width: 90px;
+  height: 90px;
+  margin: 10px 0 0 10px;
+  color: white;
+  font-weight: bold;
+  font-size: 45px;
+  text-align: center;
+  line-height: 100px;
+}
+
+.tile-0 {
+  background: rgba(255,255,255,0.35);
+}
+
+.tile-2 {
+  background: #485d68;
+}
+
+.tile-4 {
+  background: #2ca796;
+}
+
+.tile-8 {
+  background: #8e4c0c;
+}
+
+.tile-16 {
+  background: #ac1d7f; 
+}
+
+.tile-32 {
+  background: #ffc605; 
+}
+
+.tile-64 {
+  background: #009dcd;
+}
+
+.tile-128 {
+  background: #007541;
+  font-size: 40px;
+}
+
+.tile-256 {
+  background: #ff5500;
+  font-size: 40px;
+}
+
+.tile-512 {
+  background: #bfcc09;
+  font-size: 40px;
+}
+
+.tile-1024 {
+  background: #003669;
+  font-size: 35px;
+}
+
+.tile-2048 {
+  background: #f42c59;
+  font-size: 35px;
+}
+
+.tile-higher {
+  background: #f42c59;
+  font-size: 30px;
+}
